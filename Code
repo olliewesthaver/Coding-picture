@@ -1,0 +1,76 @@
+import turtle
+import random
+
+screen = turtle.Screen()
+screen.setup(400, 400) 
+t = turtle.Turtle()
+t.speed(0)
+t.shape('blank')
+screen.bgcolor('lightblue')
+
+def draw_sun(t, x, y, size, color, sunbeams):
+    t.penup()
+    t.goto(x, y)
+    t.pendown()
+    t.color(color)
+    t.begin_fill()
+    t.circle(size)
+    t.end_fill()
+    t.penup()
+    t.goto(x, y + size)
+    t.left(70)
+    for _ in range(12):
+        t.right(360 / sunbeams)
+        t.pendown()
+        t.forward(size + 20)
+        t.penup()
+        t.goto(x, y + size)
+
+def filled_circle(size):
+    t.color('white')
+    t.begin_fill()
+    t.circle(size)
+    t.end_fill()
+
+draw_sun(t, -195, 70, 25, "yellow", 10)
+
+def draw_clouds(t, size, number):
+    for _ in range(number):
+        t.penup()
+        t.goto(random.randint(-150, 200), random.randint(0, 160))
+        t.pendown()
+        filled_circle(size)
+        t.forward(size)
+        filled_circle(size)
+        t.right(90)
+        filled_circle(size)
+        t.right(90)
+        filled_circle(size)
+        t.right(90)
+        filled_circle(size)
+        t.right(90)
+
+draw_clouds(t, 10, 5)
+
+def draw_mini_city():
+  buildings = random.randint(3,6) 
+  min_height = 30
+  max_height = 200
+  for _ in range(buildings):
+    x = random.randint(-180, 180)
+    height = random.randint(min_height, max_height)
+    width = random.randint(10, 40)
+    t.penup()
+    t.goto(x, -200)  
+    t.setheading(90)  
+    t.pendown()
+    t.color('black')
+    t.begin_fill()
+    for _ in range(2):
+      t.forward(height)
+      t.left(90)
+      t.forward(width)
+      t.left(90)
+draw_mini_city()
+ 
+screen.exitonclick()
